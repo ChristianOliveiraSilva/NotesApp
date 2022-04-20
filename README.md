@@ -1,6 +1,6 @@
-# flutter_teste
+# notes
 
-A new Flutter application.
+Note App
 
 ## Getting Started
 
