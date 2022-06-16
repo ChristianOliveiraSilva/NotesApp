@@ -8,28 +8,41 @@ void main() {
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  List<Annotation> list = [];
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Notes App',
-      theme: ThemeData(
-        scaffoldBackgroundColor: backgroundColor,
-        primaryColor: primaryColor,
-        textTheme: Theme.of(context).textTheme.apply(bodyColor: textColor),
-      ),
-      home: Container(
-        child: ListScreen(
-            annotations: [
-              Annotation(name: 'Título 1', text: 'text 1', date: 'date'),
-              Annotation(name: 'Título 2', text: 'text 2', date: 'date'),
-              Annotation(name: 'Título 3', text: 'text 3', date: 'date'),
-              Annotation(name: 'Título 4', text: 'text 4', date: 'date'),
-            ]
+        debugShowCheckedModeBanner: false,
+        title: 'Notes App',
+        theme: ThemeData(
+          scaffoldBackgroundColor: backgroundColor,
+          primaryColor: primaryColor,
+          textTheme: Theme.of(context).textTheme.apply(bodyColor: textColor),
+        ),
+        home: Container(
+            child: ListScreen(
+                annotations: list,
+                updateAnnotation: (Annotation annotation) {
+                  setState(() {
+                    if (list.indexOf(annotation) == -1) {
+                      list.add(annotation);
+                    }
+                  });
+                },
+                removeAnnotation: (Annotation annotation) {
+                  setState(() {
+                    list.remove(annotation);
+                  });
+                }
+            )
         )
-      )
     );
   }
 }

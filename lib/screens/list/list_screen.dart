@@ -4,9 +4,11 @@ import 'package:notes/screens/form/form_screen.dart';
 import 'package:notes/screens/list/components/annotation_list.dart';
 
 class ListScreen extends StatelessWidget {
-  const ListScreen({required this.annotations, Key? key}) : super(key: key);
+  const ListScreen({required this.annotations, required this.updateAnnotation, required this.removeAnnotation, Key? key}) : super(key: key);
 
   final List<Annotation> annotations;
+  final Function updateAnnotation;
+  final Function removeAnnotation;
 
   @override
   Widget build(BuildContext context) {
@@ -24,14 +26,16 @@ class ListScreen extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => FormScreen(),
+                  builder: (context) => FormScreen(updateAnnotation: updateAnnotation, removeAnnotation: removeAnnotation),
                 ),
               );
             },
           ),
         ),
         body: AnnotationList(
-          annotations: annotations,
+            annotations: annotations,
+            updateAnnotation: updateAnnotation,
+            removeAnnotation: removeAnnotation
         ),
       );
   }
