@@ -1,37 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:notes/Annotation.dart';
+import 'package:notes/screens/list/list_screen.dart';
 
-/*
-class AnnotationList extends StatefulWidget {
-  const AnnotationList({required this.annotations, Key? key}) : super(key: key);
 
-  final List<Annotation> annotations;
+class Form extends StatefulWidget {
+  Form({this.annotation, Key? key}) : super(key: key);
+
+  Annotation? annotation;
 
   @override
-  _AnnotationListState createState() => _AnnotationListState();
+  _FormState createState() => _FormState();
 }
 
-class _AnnotationListState extends State<AnnotationList> {
+class _FormState extends State<Form> {
 
   void _handleCartChanged(Annotation annotation) {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => HomeScreen(),
+        builder: (context) => ListScreen(annotations: []),
       ),
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      padding: const EdgeInsets.symmetric(vertical: 8.0),
-      children: widget.annotations.map((Annotation annotation) {
-        return AnnotationListItem(
-          annotation: annotation,
-          onCartChanged: _handleCartChanged,
-        );
-      }).toList(),
-    );
+    return const Text('asdasdd');
   }
 }
-*/

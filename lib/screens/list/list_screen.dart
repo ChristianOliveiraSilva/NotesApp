@@ -12,7 +12,6 @@ class ListScreen extends StatelessWidget {
   Widget build(BuildContext context) {
       return Scaffold(
         appBar: AppBar(
-          elevation: 0,
           title: const Text('Notes'),
           leading: IconButton(
             icon: Icon(
@@ -25,7 +24,7 @@ class ListScreen extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => ListScreen(annotations: annotations),
+                  builder: (context) => FormScreen(),
                 ),
               );
             },

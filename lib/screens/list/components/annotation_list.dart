@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:notes/Annotation.dart';
-import 'package:notes/screens/home/home_screen.dart';
 import 'package:notes/screens/list/components/annotation_list_item.dart';
 
 class AnnotationList extends StatefulWidget {
@@ -13,11 +12,6 @@ class AnnotationList extends StatefulWidget {
 }
 
 class _AnnotationListState extends State<AnnotationList> {
-
-  void _handleCartChanged(Annotation annotation) {
-
-  }
-
   @override
   Widget build(BuildContext context) {
     return ListView(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:notes/Annotation.dart';
+import 'package:notes/screens/form/form_screen.dart';
 
 class AnnotationListItem extends StatelessWidget {
   AnnotationListItem({
@@ -11,10 +12,17 @@ class AnnotationListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      onTap: () {},
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => FormScreen(annotation: annotation),
+          ),
+        );
+      },
       leading: CircleAvatar(
         backgroundColor: Theme.of(context).primaryColor,
-        child: Text(annotation.name[0]),
+        child: Text(annotation.name[0].toUpperCase()),
       ),
       title: Text(
         annotation.name
