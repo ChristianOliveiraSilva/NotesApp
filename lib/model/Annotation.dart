@@ -4,7 +4,7 @@ class Annotation {
 
   String name;
   String text;
-  String date;
+  DateTime date;
 }
 
 // typedef AnnotationItemChangedCallback = Function(Annotation annotation);

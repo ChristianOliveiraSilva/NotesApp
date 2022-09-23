@@ -14,7 +14,7 @@ class ListScreen extends StatelessWidget {
   Widget build(BuildContext context) {
       return Scaffold(
         appBar: AppBar(
-          title: const Text('Notes'),
+          title: const Text('Notes 2.0'),
           leading: IconButton(
             icon: const Icon(
               Icons.add,

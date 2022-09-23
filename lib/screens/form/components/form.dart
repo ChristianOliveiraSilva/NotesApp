@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:notes/model/Annotation.dart';
+import 'package:intl/intl.dart';
 
 class FormAnnotation extends StatefulWidget {
   const FormAnnotation({this.annotation, required this.updateAnnotation, required this.removeAnnotation, Key? key}) : super(key: key);
@@ -28,12 +29,12 @@ class _FormAnnotationState extends State<FormAnnotation> {
     super.initState();
 
     if (widget.annotation == null) {
-      annotation = Annotation(name: '', text: '', date: '');
+      annotation = Annotation(name: '', text: '', date: DateTime.now());
     } else {
       annotation = widget.annotation;
       _nameController.text = widget.annotation!.name;
       _textController.text = widget.annotation!.text;
-      _dateController.text = widget.annotation!.date;
+      _dateController.text = DateFormat('dd/MM/yyyy').format(widget.annotation!.date);
     }
   }
 
@@ -49,7 +50,7 @@ class _FormAnnotationState extends State<FormAnnotation> {
               children: <Widget>[
                 TextField(
                   controller: _nameController,
-                  decoration: const InputDecoration(labelText: "Nome"),
+                  decoration: const InputDecoration(labelText: "Name"),
                   onChanged: (text) {
                     setState(() {
                       annotation!.name = text;
@@ -58,7 +59,7 @@ class _FormAnnotationState extends State<FormAnnotation> {
                 ),
                 TextField(
                   controller: _textController,
-                  decoration: const InputDecoration(labelText: "Texto"),
+                  decoration: const InputDecoration(labelText: "Text"),
                   onChanged: (text) {
                     setState(() {
                       annotation!.text = text;
@@ -68,13 +69,30 @@ class _FormAnnotationState extends State<FormAnnotation> {
                 ),
                 TextField(
                   controller: _dateController,
-                  decoration: const InputDecoration(labelText: "Data"),
-                  onChanged: (text) {
-                    setState(() {
-                      annotation!.date = text;
-                    });
+                  decoration: const InputDecoration(
+                    icon: Icon(Icons.calendar_today),
+                    labelText: "Date"
+                  ),
+                  onTap: () async {
+                    DateTime? pickedDate = await showDatePicker(
+                        context: context, initialDate: DateTime.now(),
+                        firstDate: DateTime(2000),
+                        lastDate: DateTime(2101)
+                    );
+                    
+                    if (pickedDate != null) {
+                        String formattedDate = DateFormat('dd/MM/yyyy').format(pickedDate); 
+
+                        setState(() {
+                          annotation!.date = pickedDate;
+                          _dateController.text = formattedDate;
+                        });
+                    } else {
+                        print("Date is not selected");
+                        annotation!.date = DateTime.now();
+                        _dateController.text = "";
+                    }
                   },
-                  keyboardType: TextInputType.datetime,
                 ),
             ]),
             Row (
