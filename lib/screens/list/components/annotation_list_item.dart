@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:notes/Annotation.dart';
+import 'package:notes/model/Annotation.dart';
 import 'package:notes/screens/form/form_screen.dart';
 
 class AnnotationListItem extends StatelessWidget {

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:notes/Annotation.dart';
+import 'package:notes/model/Annotation.dart';
 import 'package:notes/constants.dart';
 import 'package:notes/screens/form/form_screen.dart';
 import 'package:notes/screens/list/list_screen.dart';
@@ -26,22 +26,20 @@ class _MyAppState extends State<MyApp> {
           primaryColor: primaryColor,
           textTheme: Theme.of(context).textTheme.apply(bodyColor: textColor),
         ),
-        home: Container(
-            child: ListScreen(
-                annotations: list,
-                updateAnnotation: (Annotation annotation) {
-                  setState(() {
-                    if (list.indexOf(annotation) == -1) {
-                      list.add(annotation);
-                    }
-                  });
-                },
-                removeAnnotation: (Annotation annotation) {
-                  setState(() {
-                    list.remove(annotation);
-                  });
+        home: ListScreen(
+            annotations: list,
+            updateAnnotation: (Annotation annotation) {
+              setState(() {
+                if (!list.contains(annotation)) {
+                  list.add(annotation);
                 }
-            )
+              });
+            },
+            removeAnnotation: (Annotation annotation) {
+              setState(() {
+                list.remove(annotation);
+              });
+            }
         )
     );
   }

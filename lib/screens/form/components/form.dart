@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:notes/Annotation.dart';
-import 'package:notes/screens/list/list_screen.dart';
+import 'package:notes/model/Annotation.dart';
 
 class FormAnnotation extends StatefulWidget {
-  FormAnnotation({this.annotation, required this.updateAnnotation, required this.removeAnnotation, Key? key}) : super(key: key);
+  const FormAnnotation({this.annotation, required this.updateAnnotation, required this.removeAnnotation, Key? key}) : super(key: key);
 
-  Annotation? annotation;
+  final Annotation? annotation;
   final Function updateAnnotation;
   final Function removeAnnotation;
 
@@ -28,8 +27,8 @@ class _FormAnnotationState extends State<FormAnnotation> {
   void initState() {
     super.initState();
 
-    if(widget.annotation == null){
-      annotation = new Annotation(name: '', text: '', date: '');
+    if (widget.annotation == null) {
+      annotation = Annotation(name: '', text: '', date: '');
     } else {
       annotation = widget.annotation;
       _nameController.text = widget.annotation!.name;
@@ -40,45 +39,49 @@ class _FormAnnotationState extends State<FormAnnotation> {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-        padding: EdgeInsets.all(10.0),
+    return Container(
+        padding: const EdgeInsets.all(15),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisSize: MainAxisSize.max,
           children: <Widget>[
-            TextField(
-              controller: _nameController,
-              decoration: InputDecoration(labelText: "Nome"),
-              onChanged: (text) {
-                setState(() {
-                  annotation!.name = text;
-                });
-              },
-            ),
-            TextField(
-              controller: _textController,
-              decoration: InputDecoration(labelText: "Texto"),
-              onChanged: (text) {
-                setState(() {
-                  annotation!.text = text;
-                });
-              },
-              keyboardType: TextInputType.emailAddress,
-            ),
-            TextField(
-              controller: _dateController,
-              decoration: InputDecoration(labelText: "Data"),
-              onChanged: (text) {
-                setState(() {
-                  annotation!.date = text;
-                });
-              },
-              keyboardType: TextInputType.datetime,
-            ),
-            Divider(),
+            Column(
+              children: <Widget>[
+                TextField(
+                  controller: _nameController,
+                  decoration: const InputDecoration(labelText: "Nome"),
+                  onChanged: (text) {
+                    setState(() {
+                      annotation!.name = text;
+                    });
+                  },
+                ),
+                TextField(
+                  controller: _textController,
+                  decoration: const InputDecoration(labelText: "Texto"),
+                  onChanged: (text) {
+                    setState(() {
+                      annotation!.text = text;
+                    });
+                  },
+                  maxLines: 3,
+                ),
+                TextField(
+                  controller: _dateController,
+                  decoration: const InputDecoration(labelText: "Data"),
+                  onChanged: (text) {
+                    setState(() {
+                      annotation!.date = text;
+                    });
+                  },
+                  keyboardType: TextInputType.datetime,
+                ),
+            ]),
             Row (
               children: <Widget>[
                 Expanded(child:
                   ElevatedButton(
-                    child: Text("Cancelar"),
+                    child: const Text("Cancelar"),
                     onPressed: () {
                       Navigator.pop(context);
                     },
@@ -86,7 +89,7 @@ class _FormAnnotationState extends State<FormAnnotation> {
                 ),
                 Expanded(child:
                   ElevatedButton(
-                    child: Text("Excluir"),
+                    child: const Text("Excluir"),
                     onPressed: () {
                       if(widget.isEditing()) {
                         widget.removeAnnotation(annotation);
@@ -100,7 +103,7 @@ class _FormAnnotationState extends State<FormAnnotation> {
                 ),
                 Expanded(child:
                   ElevatedButton(
-                    child: Text("Salvar"),
+                    child: const Text("Salvar"),
                     onPressed: () {
                       widget.updateAnnotation(annotation);
                       Navigator.pop(context);
@@ -109,7 +112,8 @@ class _FormAnnotationState extends State<FormAnnotation> {
                 )
               ]
             )
-          ],
-        ));
+          ]
+       )
+    );
   }
 }

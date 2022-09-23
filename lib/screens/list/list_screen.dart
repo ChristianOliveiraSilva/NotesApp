@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:notes/Annotation.dart';
+import 'package:notes/model/Annotation.dart';
 import 'package:notes/screens/form/form_screen.dart';
 import 'package:notes/screens/list/components/annotation_list.dart';
 
@@ -16,7 +16,7 @@ class ListScreen extends StatelessWidget {
         appBar: AppBar(
           title: const Text('Notes'),
           leading: IconButton(
-            icon: Icon(
+            icon: const Icon(
               Icons.add,
               color: Colors.white,
               size: 24.0,

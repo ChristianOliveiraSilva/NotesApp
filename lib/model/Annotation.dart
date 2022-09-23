@@ -1,5 +1,4 @@
 
-
 class Annotation {
   Annotation({required this.name, required this.text, required this.date});
 
