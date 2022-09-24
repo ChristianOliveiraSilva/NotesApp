@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:notes/model/Annotation.dart';
 import 'package:notes/constants.dart';
-import 'package:notes/screens/form/form_screen.dart';
+import 'package:notes/provider/app_preferences.dart';
 import 'package:notes/screens/list/list_screen.dart';
 
 void main() {
@@ -15,6 +15,19 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   List<Annotation> list = [];
+  
+  @override
+  initState() {
+    super.initState();
+    asyncMethod();
+  }
+
+  void asyncMethod() async {
+    final List<Annotation> l = await DBAbstraction.getList();
+    setState(() {
+      list = l;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,11 +46,13 @@ class _MyAppState extends State<MyApp> {
                 if (!list.contains(annotation)) {
                   list.add(annotation);
                 }
+                DBAbstraction.saveList(list: list);
               });
             },
             removeAnnotation: (Annotation annotation) {
               setState(() {
                 list.remove(annotation);
+                DBAbstraction.saveList(list: list);
               });
             }
         )
